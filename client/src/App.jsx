@@ -10,8 +10,13 @@ import AddWriter from './dashboard/pages/AddWriter'
 import Writers from './dashboard/pages/Writers'
 import News from './dashboard/pages/News'
 import Profile from './dashboard/pages/Profile'
+import WriterIndex from './dashboard/pages/WriterIndex'
+import CreateNews from './dashboard/pages/CreateNews'
 
 function App() {
+  const userInfo = {
+    role: "writer"
+  }
 
   return (
       <BrowserRouter>
@@ -19,15 +24,23 @@ function App() {
           <Route path='/login' element={<Login/>}/>
           <Route path='/dashboard' element={<ProtectDashboard/>}>
             <Route path='' element={<MainLayout/>}>
-              <Route path='' element={<Navigate to='/dashboard/admin' />}/>
+              <Route path='' element={userInfo.role === 'admin' ? <Navigate to='/dashboard/admin' /> : <Navigate to='/dashboard/writer' />}/>
               <Route path='unable-access' element={<Unable/>}/>
               <Route path='news' element={<News/>}/>
               <Route path='profile' element={<Profile/>} />
+
               <Route path='' element={<ProtectRole role='admin'/>}> 
                 <Route path='admin' element={<AdminIndex/>}/>
                 <Route path='writer/add' element={<AddWriter/>}/>
                 <Route path='writers' element={<Writers/>}/>
               </Route>
+
+              <Route path='' element={<ProtectRole role='writer' />} >
+              <Route path='writer' element={<WriterIndex />} />
+              <Route path='news/create' element={<CreateNews />} />
+              {/* <Route path='news/edit/:news_id' element={<Edit_news />} /> */}
+            </Route>
+
             </Route>
           </Route>
         </Routes>
