@@ -29,7 +29,7 @@ const Writer = () => {
                 [1, 2, 3, 4, 5, 6, 7].map((n, i) => <tr key={i} className='bg-white border-b' >
                   <td className='px-6 py-4'>{i + 1}</td>
                   <td className='px-6 py-4'>Md. Jihad</td>
-                  <td className='px-6 py-4'>Hons</td>
+                  <td className='px-6 py-4'>Sports</td>
                   <td className='px-6 py-4'>Writer</td>
                   <td className='px-6 py-4'>
                     <img className='w-[40px] h-[40px]' src='https://media.istockphoto.com/id/511119924/photo/tea-plantations-and-river-in-hills-kerala-india.webp?b=1&s=170667a&w=0&k=20&c=Raufg0A7TNVjLe-92r5zXJxsH8oyDZjGENR34jliB4Y=' alt="" />
