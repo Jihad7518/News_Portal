@@ -78,14 +78,14 @@ class authController {
         }
     }
 
-    // get_writers = async (req, res) => {
-    //     try {
-    //         const writers = await authModel.find({ role: "writer" }).sort({ createdAt: -1 })
-    //         return res.status(200).json({ writers })
-    //     } catch (error) {
-    //         return res.status(500).json({ message: 'internal server error' })
-    //     }
-    // }
+    get_writers = async (req, res) => {
+        try {
+            const writers = await authModel.find({ role: "writer" }).sort({ createdAt: -1 })
+            return res.status(200).json({ writers })
+        } catch (error) {
+            return res.status(500).json({ message: 'internal server error' })
+        }
+    }
 }
 
 module.exports = new authController()
