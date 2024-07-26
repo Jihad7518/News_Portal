@@ -31,15 +31,15 @@ const AddWriter = () => {
               </select>
             </div>
           </div>
-          <div className='grid grid-cols-2 gap-x-8 mb-3'>
+          <div className='grid grid-col-2 gap-x-8 mb-3'>
             <div className='flex flex-col gap-y-2'>
               <label className='text-md font-medium text-gray-600' htmlFor="email">Email</label>
-              <input type='text' placeholder='email' name='email' className='px-3 py-2 rounded-md 
+              <input type='email' placeholder='email' name='email' className='px-3 py-2 rounded-md 
                   outline-0 border border-gray-300 focus:border-green-500 h-10' id='email'/>
             </div>
             <div className='flex flex-col gap-y-2'>
               <label className='text-md font-medium text-gray-600' htmlFor="password">Password</label>
-              <input type='text' placeholder='password' name='password' className='px-3 py-2 rounded-md 
+              <input type='password' placeholder='password' name='password' className='px-3 py-2 rounded-md 
                   outline-0 border border-gray-300 focus:border-green-500 h-10' id='password'/>
             </div>
           </div>

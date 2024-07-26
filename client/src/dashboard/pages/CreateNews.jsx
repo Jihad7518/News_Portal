@@ -4,6 +4,9 @@ import { MdCloudUpload } from "react-icons/md";
 import JoditEditor from 'jodit-react'
 
 const CreateNews = () => {
+
+  const [images, setImages] = useState(false)
+
   return (
     <div className='bg-white rounded-md '>
       <div className='flex justify-between p-4'>
@@ -33,7 +36,7 @@ const CreateNews = () => {
             <div className='flex flex-col gap-y-2 mb-6'>
                   <div className='flex justify-start items-center gap-x-2'>
                       <h2>Description</h2>
-                      <div>
+                      <div onClick={() => setShow(true)}>
                           <span className='text-2xl cursor-pointer'><MdCloudUpload /></span>
                       </div>
                   </div>
@@ -46,6 +49,9 @@ const CreateNews = () => {
             </div>
         </form>
       </div>
+      {
+        show && <Galler setShow={setShow} images={images} />
+      }
     </div>
   )
 }
