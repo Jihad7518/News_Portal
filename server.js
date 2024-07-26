@@ -21,6 +21,7 @@ if (process.env.mode === 'production') {
 const port = process.env.port
 
 app.use('/', require('./routes/authRoutes'))
+app.use('/', require('./routes/newsRoute'))
 app.get('/', (req, res) => res.send('Hello World!'))
 
 db_connect()
