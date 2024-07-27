@@ -1,1 +1,1 @@
-# News_Portal_Mern_Stack
+# News_Portal_Mern_Stack_Also_Nextjs
