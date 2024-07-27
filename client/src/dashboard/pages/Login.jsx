@@ -43,7 +43,7 @@ const Login = () => {
     } catch (error) {
       console.log(error)
       setLoader(false)
-      toast.error(eror.response.data.message)
+      toast.error(error.response.data.message)
     }
   }
 
