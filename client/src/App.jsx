@@ -14,6 +14,8 @@ import WriterIndex from './dashboard/pages/WriterIndex'
 import CreateNews from './dashboard/pages/CreateNews'
 import storeContext from './context/storeContext'
 import Edit_news from './dashboard/pages/Edit_news'
+//import NewsContent from './dashboard/components/NewsContent'
+//import AdminNewsDetail from './dashboard/components/AdminNewsDetail'
 
 function App() {
 
@@ -22,6 +24,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Navigate to="/login" />} />
         <Route path='/login' element={<Login />} />
         <Route path='/dashboard' element={<ProtectDashboard />} >
           <Route path='' element={<MainLayout />}>
@@ -41,6 +44,7 @@ function App() {
               <Route path='news/create' element={<CreateNews />} />
               <Route path='news/edit/:news_id' element={<Edit_news />} />
             </Route>
+            {/* <Route path="/dashboard/news/:id" element={<AdminNewsDetail />} /> */}
 
           </Route>
         </Route>
