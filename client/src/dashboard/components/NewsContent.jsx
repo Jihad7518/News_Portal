@@ -96,13 +96,13 @@ const NewsContent = () => {
     };
 
     const handlePreview = (newsItem) => {
-        setSelectedNews(newsItem);
-        setIsModalOpen(true);
+        setSelectedNews(newsItem); // Set the selected news
+        setIsModalOpen(true); // Open the modal
     };
 
     const closeModal = () => {
-        setIsModalOpen(false);
-        setSelectedNews(null);
+        setIsModalOpen(false); // Close the modal
+        setSelectedNews(null); // Reset selected news
     };
 
     return (
@@ -225,7 +225,7 @@ const NewsContent = () => {
         <div className='bg-white p-5 rounded shadow-lg max-w-lg w-full' style={{ maxWidth: '130vh', maxHeight: '70vh', overflowY: 'auto', marginLeft: '20px' }}>
             <h1 className='text-lg font-bold'>{selectedNews?.title}</h1>
             <img className='my-3 w-full h-auto' src={selectedNews?.image} alt={selectedNews?.title} />
-            <div className='my-3 whitespace-pre-wrap break-words'>{convert(selectedNews?.description)}</div>
+            <div className='my-3 whitespace-pre-wrap break-words'>{convert(selectedNews?.description)}</div> {/* Ensured text wraps correctly */}
             <p className='text-sm text-gray-500'>Published on: {selectedNews?.date}</p>
             <button onClick={closeModal} className='mt-4 px-4 py-2 bg-red-500 text-white rounded'>Close</button>
         </div>
