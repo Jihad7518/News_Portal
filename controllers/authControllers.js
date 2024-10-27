@@ -1,6 +1,14 @@
 const authModel = require('../models/authModel')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const cloudinary = require('cloudinary').v2;
+
+cloudinary.config({
+    cloud_name: process.env.cloud_name,
+    api_key: process.env.api_key,
+    api_secret: process.env.api_secret,
+    secure: true
+})
 
 class authController {
     login = async (req, res) => {
@@ -86,6 +94,61 @@ class authController {
             return res.status(500).json({ message: 'internal server error' })
         }
     }
+
+    changePassword = async (req, res) => {
+        const { old_password, new_password } = req.body;
+        const userId = req.userInfo.id;
+    
+        if (!old_password || !new_password) {
+            return res.status(400).json({ message: 'Please provide both old and new passwords.' });
+        }
+    
+        try {
+            const user = await authModel.findById(userId).select('+password');
+            if (!user) {
+                return res.status(404).json({ message: 'User not found' });
+            }
+    
+            const isMatch = await bcrypt.compare(old_password, user.password);
+            if (!isMatch) {
+                return res.status(400).json({ message: 'Old password is incorrect' });
+            }
+    
+            user.password = await bcrypt.hash(new_password, 10);
+            await user.save();
+            return res.status(200).json({ message: 'Password changed successfully' });
+    
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ message: 'Internal server error' });
+        }
+    }
+
+    uploadProfileImage = async (req, res) => {
+        try {
+            const file = req.files.images; // Assuming you use multer or another file upload middleware
+            if (!file) {
+                return res.status(400).json({ message: 'No file uploaded' });
+            }
+
+            // Upload the file to Cloudinary
+            const result = await cloudinary.uploader.upload(file.path, {
+                folder: 'profile_images', // Optional folder for organization
+                public_id: `profile_${req.userInfo.id}`, // Optional naming convention
+            });
+
+            // Update user profile image URL in the database
+            await authModel.findByIdAndUpdate(req.userInfo.id, { profileImage: result.secure_url });
+
+            return res.status(200).json({ message: 'Image uploaded successfully', imageUrl: result.secure_url });
+        } catch (error) {
+            console.error('Image upload error:', error);
+            return res.status(500).json({ message: 'Image upload failed' });
+        }
+    };
+
+    
+
 }
 
 module.exports = new authController()
