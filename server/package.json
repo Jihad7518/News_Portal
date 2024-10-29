@@ -8,7 +8,8 @@
     "client": "npm run dev --prefix client",
     "start": "node server.js",
     "build": "npm run build --prefix client",
-    "dev": "concurrently \" npm run server \" \" npm run client \""
+    "dev:server": "nodemon server.js",  // Keep this for development
+    "dev:client": "npm run dev --prefix client" // Run client separately if needed
   },
   "keywords": [],
   "author": "",
@@ -27,7 +28,7 @@
     "multer": "^1.4.5-lts.1"
   },
   "devDependencies": {
-    "concurrently": "^8.2.2",
+    "concurrently": "^8.2.2", // You can remove this if you're not using it
     "nodemon": "^3.1.4",
     "vite": "^5.4.10"
   }
